@@ -1,4 +1,4 @@
-package com.sumerge.tmdb.movie.rest;
+package com.sumerge.tmdb.movie.controller;
 
 
 import com.sumerge.tmdb.movie.entities.Movie;
@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/tmdb")
 public class MovieController {
+
 
     private MovieService movieService;
 
@@ -21,9 +21,9 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-        public Page<Movie> findAllPaged(@RequestParam int page) {
+        public Page<Movie> findAllPaged(@RequestParam int page,@RequestParam int pageSize) {
 
-        return movieService.findPaged(page);
+        return movieService.findPaged(page,pageSize);
     }
 
 

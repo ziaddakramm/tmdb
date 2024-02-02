@@ -1,7 +1,7 @@
 package com.sumerge.tmdb.movie.service;
 
 
-import com.sumerge.tmdb.movie.dao.MovieRepository;
+import com.sumerge.tmdb.movie.repository.MovieRepository;
 import com.sumerge.tmdb.movie.entities.Movie;
 import com.sumerge.tmdb.movie.exception.MovieNotFoundException;
 import com.sumerge.tmdb.movie.exception.PageNotFoundException;
@@ -11,13 +11,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieService {
 
     private MovieRepository movieRepository;
+
+
+
+
 
     @Autowired
     public MovieService(MovieRepository movieRepository) {
@@ -26,12 +29,9 @@ public class MovieService {
 
 
     //to  be updated to handle pagination
-    public List<Movie> findAll(){
-        return movieRepository.findAll();
-    }
 
-    public Page<Movie> findPaged(int pageNumber){
-        Pageable pageable = PageRequest.of(pageNumber, 2);
+    public Page<Movie> findPaged(int pageNumber,int pageSize){
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         Page<Movie> page= movieRepository.findAll(pageable);
 
@@ -58,9 +58,11 @@ public class MovieService {
         else
         {
             //to be updated
-            throw new MovieNotFoundException("Did not find employee with id - "+ id);
+            throw new MovieNotFoundException("Did not find movie with id - "+ id);
         }
 
 
     }
+
+
 }
