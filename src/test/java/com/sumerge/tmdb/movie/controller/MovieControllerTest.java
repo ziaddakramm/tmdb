@@ -1,7 +1,8 @@
 package com.sumerge.tmdb.movie.controller;
 
 
-//import com.sumerge.tmdb.movie.config.MovieTestConfiguration;
+
+import com.sumerge.tmdb.movie.client.AuthClient;
 import com.sumerge.tmdb.movie.entities.Movie;
 import com.sumerge.tmdb.movie.service.MovieService;
         import org.junit.Test;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
         import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
@@ -37,19 +39,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(MovieController.class)
 @AutoConfigureMockMvc(addFilters = false)
+
 public class MovieControllerTest {
 
-//    @Autowired
-//    WebApplicationContext webApplicationContext;
+
 
     @Autowired
     private MockMvc mockMvc;
 
-//    @Autowired
-//    private WireMockServer wireMockServer;
-
-//    @Autowired
-//    AuthFilter authFilter;
+    @MockBean
+    private AuthClient client;
 
     @MockBean
     private MovieService movieService;
@@ -62,15 +61,11 @@ public class MovieControllerTest {
 
     @BeforeEach
     void setUp() {
-//        autoCloseable = MockitoAnnotations.openMocks(this);
-//        underTest = new MovieController();
-//        wireMockServer.start();
-//        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
+ }
 
     @AfterEach
     void tearDown() {
-//        wireMockServer.stop();
+
     }
 
     @Test
@@ -79,7 +74,6 @@ public class MovieControllerTest {
 
         Page<Movie> mockPage = new PageImpl(movies);
 
-//        this.wireMockServer.stubFor(WireMock.get("/api/auth/validate").willReturn(aResponse().withStatus(200)));
 
         Mockito.when(movieService.findPaged(0,2)).thenReturn(mockPage);
 

@@ -28,7 +28,7 @@ public class MovieService {
     }
 
 
-    //to  be updated to handle pagination
+
 
     public Page<Movie> findPaged(int pageNumber,int pageSize){
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -57,7 +57,7 @@ public class MovieService {
         }
         else
         {
-            //to be updated
+
             throw new MovieNotFoundException("Did not find movie with id - "+ id);
         }
 

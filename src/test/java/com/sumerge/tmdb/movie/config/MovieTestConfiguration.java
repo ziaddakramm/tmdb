@@ -4,14 +4,13 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 
 import org.springframework.boot.test.context.TestConfiguration;
 
-import org.springframework.context.ConfigurableApplicationContext;
+
 import org.springframework.context.annotation.Bean;
 
 
 @TestConfiguration
 public class MovieTestConfiguration {
-//    @MockBean
-//    private MovieRepository movieRepository;
+
 
     @Bean
     public WireMockServer wireMockServer(){
@@ -20,17 +19,6 @@ public class MovieTestConfiguration {
         return server;
     }
 
-
-//    @Bean()
-//    public ServerList<Server> ribbonServerList(WireMockServer wms, ConfigurableApplicationContext applicationContext) {
-//        return new StaticServerList<>(new Server("localhost", wms.port()));
-//
-//    }
-
-//    @Bean MovieService movieService()
-//    {
-//        return new MovieService(movieRepository);
-//    }
 
 }
 

@@ -44,7 +44,7 @@ public class MovieControllerInteg {
     @Autowired
     WebApplicationContext webApplicationContext;
 
-//    @Autowired
+
     private MockMvc mockMvc;
 
     @Autowired

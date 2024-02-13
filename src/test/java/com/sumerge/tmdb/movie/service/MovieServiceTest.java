@@ -78,7 +78,7 @@ public class MovieServiceTest {
 
 
     @Test
-    //whenExceptionThrown_thenAssertionSucceeds
+
     public void MovieNotFoundException() throws MovieNotFoundException {
         int id = 1;
 
@@ -96,7 +96,7 @@ public class MovieServiceTest {
 
 
     @Test
-    //whenExceptionThrown_thenAssertionSucceeds
+
     public void PageNotFoundException() throws PageNotFoundException {
 
         int pageNumber=4;

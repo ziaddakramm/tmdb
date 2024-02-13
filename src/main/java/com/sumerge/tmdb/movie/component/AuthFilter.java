@@ -1,6 +1,7 @@
 package com.sumerge.tmdb.movie.component;
 
 
+import com.sumerge.tmdb.movie.client.AuthClient;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +30,9 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Value("${auth-url}")
     private  String authUrl;
+
+
+    private final AuthClient authClient;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -52,7 +57,8 @@ public class AuthFilter extends OncePerRequestFilter {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         try{
-            ResponseEntity<Void> authResponse = restTemplate.exchange(authUrl, HttpMethod.GET, entity, Void.class);
+
+            ResponseEntity<Void> authResponse = authClient.getValidation("Bearer " + jwtToken);
 
             if (authResponse.getStatusCode().is2xxSuccessful()) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
