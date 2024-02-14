@@ -6,6 +6,7 @@ import com.sumerge.tmdb.movie.entities.Movie;
 import com.sumerge.tmdb.movie.exception.MovieNotFoundException;
 import com.sumerge.tmdb.movie.exception.PageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,9 +46,11 @@ public class MovieService {
     }
 
 
+
+    @Cacheable(value = "movie"/*,keyGenerator = "customKeyGenerator"*/,key = "#id")
     public Movie findById(int id){
 
-
+        System.out.println("Fetched from db");
         Optional<Movie> result =movieRepository.findById(id);
         Movie movie=null;
         if(result.isPresent())
