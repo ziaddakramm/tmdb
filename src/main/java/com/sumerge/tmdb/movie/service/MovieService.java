@@ -50,7 +50,6 @@ public class MovieService {
     @Cacheable(value = "movie"/*,keyGenerator = "customKeyGenerator"*/,key = "#id")
     public Movie findById(int id){
 
-        System.out.println("Fetched from db");
         Optional<Movie> result =movieRepository.findById(id);
         Movie movie=null;
         if(result.isPresent())
